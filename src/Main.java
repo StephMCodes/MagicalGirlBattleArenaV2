@@ -47,18 +47,28 @@ public class Main {
                     magicalGirlFactory = new EsmeFactory();
                     System.out.println(ANSI.BLUE + "You chose Esme - Sharpshooter");
 
+                    GameManager.getInstance().setPlayerName("Esme");
+
                     break; //exit the switch loop and the while loop!
                 case 2:
                     magicalGirlFactory = new AstridFactory();
                     System.out.println(ANSI.RED + "You chose Astrid - Jumbo Hammer");
+
+                    GameManager.getInstance().setPlayerName("Astrid");
+
                     break;
                 case 3:
                     magicalGirlFactory = new IrisFactory();
                     System.out.println(ANSI.MAGENTA + "You chose Iris - Dark Mage");
+
+                    GameManager.getInstance().setPlayerName("Iris");
+
                     break;
                 case 4:
                     magicalGirlFactory = new EvangelineFactory();
                     System.out.println(ANSI.YELLOW + "YOu chose Evangeline - Light Mage");
+
+                    GameManager.getInstance().setPlayerName("Evangeline");
 
                     break;
                 default:
