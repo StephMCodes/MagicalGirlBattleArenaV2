@@ -5,9 +5,6 @@ public class Main {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
 
-        //declaring player from player stats class
-        PlayerStats player = null;
-
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("WELCOME TO MAGICAL GIRL BATTLE ARENA");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -38,25 +35,29 @@ public class Main {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         System.out.println("Enter a number from [1-4]: ");
+
+        //no choice yet
+        MagicalGirlFactory magicalGirlFactory = null;
+
         while (true) {
             int characterSelect = scanner.nextInt();
+
             switch (characterSelect) {
                 case 1:
-                    //creates player and assign weapon(with saved stats) and ansi color
-                    player = new PlayerStats(MagicalGirlFightStyle.gun);
+                    magicalGirlFactory = new EsmeFactory();
                     System.out.println(ANSI.BLUE + "You chose Esme - Sharpshooter");
 
                     break; //exit the switch loop and the while loop!
                 case 2:
-                    player = new PlayerStats(MagicalGirlFightStyle.jumboHammer);
+                    magicalGirlFactory = new AstridFactory();
                     System.out.println(ANSI.RED + "You chose Astrid - Jumbo Hammer");
                     break;
                 case 3:
-                    player = new PlayerStats(MagicalGirlFightStyle.darkMagic);
+                    magicalGirlFactory = new IrisFactory();
                     System.out.println(ANSI.MAGENTA + "You chose Iris - Dark Mage");
                     break;
                 case 4:
-                    player = new PlayerStats(MagicalGirlFightStyle.lightMagic);
+                    magicalGirlFactory = new EvangelineFactory();
                     System.out.println(ANSI.YELLOW + "YOu chose Evangeline - Light Mage");
 
                     break;
@@ -66,5 +67,8 @@ public class Main {
             }
         break;
         }
+
+        //magical girl factory chosen now creates player
+        PlayerStats playerStats = magicalGirlFactory.createPlayer();
     }
     }
