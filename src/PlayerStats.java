@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class PlayerStats {
 
-    private MagicalGirlFightStyle fightStyle;
+    private ICombatStats fightStyle;
     private int currentHealth;
     private int healCharges = 3;
     private int healAmount = 20;
@@ -12,10 +12,21 @@ public class PlayerStats {
 
     private static Random rnd = new Random();
 
-    public PlayerStats(MagicalGirlFightStyle fightStyle){
+    public PlayerStats(ICombatStats fightStyle){
         this.fightStyle = fightStyle;
         this.currentHealth = fightStyle.getMaxHealth();
     }
+
+    public ICombatStats getPlayerStyle()
+    {
+        return this.fightStyle;
+    }
+
+    public void setPlayerStyle(ICombatStats fightStyle)
+    {
+        this.fightStyle = fightStyle; //increase power of player
+    }
+
 
     public int Damage(){
         //gets base strength value
@@ -63,6 +74,14 @@ public class PlayerStats {
     //determines who goes first
     public int getAgility(){
         return fightStyle.getAgility();
+    }
+
+    //access from interface
+    public int getStrength(){
+        return fightStyle.getStrength();
+    }
+    public int getHealth(){
+        return fightStyle.getMaxHealth();
     }
 
     //all opponents skip their next turn when cc'd

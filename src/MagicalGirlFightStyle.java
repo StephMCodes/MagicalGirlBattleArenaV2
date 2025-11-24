@@ -1,6 +1,6 @@
-public enum MagicalGirlFightStyle {
+public enum MagicalGirlFightStyle implements ICombatStats {
 
-        /* each fight style/ magicalgirl with respective stats*/
+        /* each fight style/ magical girl with respective stats*/
         gun(100, 10, 12), //higher
         jumboHammer(90, 18, 4),
         darkMagic(95, 12, 10),
@@ -18,6 +18,7 @@ public enum MagicalGirlFightStyle {
             this.agility = agility;
         }
 
+        //getting these from the shared interface now
         public int getMaxHealth()
         {
             return maxHealth;
