@@ -1,4 +1,6 @@
-public class MagicalGirlDecorator {
+public abstract class MagicalGirlDecorator implements ICombatStats{
+
+
 
 
 }
