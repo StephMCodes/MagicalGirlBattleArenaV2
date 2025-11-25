@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 //using template method
@@ -9,7 +10,7 @@ public abstract class BattleSystem {
         //create enemy from subclass regular battle atm
         PlayerStats magicalGirlEnemy = createMagicalGirlEnemy();
 
-        System.out.println("Your 1st magical girl opponent appears...");
+        System.out.println("Your magical girl opponent appears..." + magicalGirlEnemy);
         //shows health of enemy magic girl
         System.out.println("Your opponents hp is "+ magicalGirlEnemy.getCurrentHealth());
 
@@ -170,8 +171,20 @@ public abstract class BattleSystem {
 
     //magical girl enemy turn
     protected void enemyTurn(PlayerStats magicalGirlEnemy, PlayerStats playerStats){
-        int dmg = magicalGirlEnemy.Damage(); //enemy calculates damage
 
+        //rnd enemy action probability out of 100
+        int enemyAction = new Random().nextInt(100);
+
+        //if cc is 20 or less + have a charge left it attacks
+        if (enemyAction <= 20 && magicalGirlEnemy.getCcCharges() > 0){
+            magicalGirlEnemy.useCC(playerStats);
+            System.out.println("Your opponent used concuss on you. You skip a turn");
+
+            return;
+
+        }
+
+        int dmg = magicalGirlEnemy.Damage(); //enemy calculates damage
         playerStats.getHit(dmg);
         System.out.println("The magical girl opponent attacked you for " + dmg + " damage!");
 }

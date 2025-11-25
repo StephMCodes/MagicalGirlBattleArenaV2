@@ -97,12 +97,19 @@ public class PlayerStats {
     }
 
     //all opponents skip their next turn when cc'd
-    public void useCC(PlayerStats magicalGirls){
+    public void useCC(PlayerStats magicalGirl){
         if (ccCharges <= 0 ){
             System.out.println("no cc's left :( ");
             return;
         }
-        magicalGirls.concussed = true;
+
+        magicalGirl.concussed = true;
+
+        //cc'd 1/2 of base attack dmg
+        int ccDamage = fightStyle.getStrength() /2;
+        magicalGirl.getHit(ccDamage);
+        System.out.println("Concuss attack did " + ccDamage + " damage!");
+
         ccCharges--;
 
     }
