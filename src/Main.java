@@ -5,29 +5,7 @@ public class Main {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
 
-
         DisplayMenu();
-
-        //IF NO SAVED GAME
-        //make our player
-        PlayerStats playerStats = MakeCharacter();
-
-        //after we finish a battle let the player get a powerup of choice
-        //DecorateCharacter(playerStats);
-
-
-        System.out.println("Player Base Style: " + playerStats.getPlayerStyle());
-        System.out.println("Max Health: " + playerStats.getHealth());
-        System.out.println("Current Health: " + playerStats.getCurrentHealth());
-        System.out.println("Strength: " + playerStats.getStrength());
-        System.out.println("Agility: " + playerStats.getAgility());
-        System.out.println("Heal Charges: " + playerStats.getHealCharges());
-        System.out.println("CC Charges: " + playerStats.getCcCharges());
-
-        //creates battle system
-        BattleSystem battleArena = new RegularBattleSystem();
-        battleArena.startBattle(playerStats); //runs battle with template design pattern
-
 
     }
 
@@ -171,7 +149,34 @@ public class Main {
             switch (menuSelect) {
                 case 1:
                     //start game
+                    //make our player
+                    PlayerStats playerStats = MakeCharacter();
 
+
+
+                    //after we finish a battle let the player get a powerup of choice
+                    //DecorateCharacter(playerStats);
+
+                    System.out.println("Player Base Style: " + playerStats.getPlayerStyle());
+                    System.out.println("Max Health: " + playerStats.getHealth());
+                    System.out.println("Current Health: " + playerStats.getCurrentHealth());
+                    System.out.println("Strength: " + playerStats.getStrength());
+                    System.out.println("Agility: " + playerStats.getAgility());
+                    System.out.println("Heal Charges: " + playerStats.getHealCharges());
+                    System.out.println("CC Charges: " + playerStats.getCcCharges());
+
+                    //creates battle system
+                    BattleSystem battleArena = new RegularBattleSystem();
+
+                    //battle loop 3 times
+                    for(int i = 1; i<=3; i++){
+
+                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + i + "~~~~~~~~~~~~~");
+
+                        battleArena.startBattle(playerStats); //runs battle with template design pattern
+                        battleArena.DecorateCharacter(playerStats); //decorates stats
+                        playerStats.resetStats(); //resets heals and cc's
+                }
                     break; //exit the switch loop and the while loop!
                 case 2:
                     //start game mode 2
