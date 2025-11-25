@@ -17,6 +17,18 @@ public class PlayerStats {
         this.currentHealth = fightStyle.getMaxHealth();
     }
 
+    public PlayerSaveData createSaveData()
+    {
+        return new PlayerSaveData(currentHealth, healCharges, ccCharges);
+    }
+
+    public void restoreSaveData(PlayerSaveData saveData)
+    {
+        this.currentHealth = saveData.getCurrentHealth();
+        this.healCharges = saveData.getHealCharges();
+        this.ccCharges = saveData.getCcCharges();
+    }
+
     public ICombatStats getPlayerStyle()
     {
         return this.fightStyle;
