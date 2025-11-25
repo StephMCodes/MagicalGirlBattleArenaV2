@@ -95,6 +95,15 @@ public class PlayerStats {
 
     }
 
+    //bool to check if cc'd then skips turn
+    public boolean skipTurn(){
+        if (concussed){
+            concussed = false;
+            return true;
+        }
+        return false;
+    }
+
     public int getCcCharges(){
         return ccCharges;
     }
