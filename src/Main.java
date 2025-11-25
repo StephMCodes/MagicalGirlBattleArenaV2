@@ -15,7 +15,7 @@ public class Main {
         PlayerStats playerStats = MakeCharacter();
 
         //after we finish a battle let the player get a powerup of choice
-        DecorateCharacter(playerStats);
+        //DecorateCharacter(playerStats);
 
 
         System.out.println("Player Base Style: " + playerStats.getPlayerStyle());
@@ -118,64 +118,64 @@ public class Main {
         return magicalGirlFactory.createPlayer();
     }
 
-    static void DecorateCharacter(PlayerStats player) {
-        //to take user input we use scanner class
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Choose one of three power accessories: ");
-        System.out.println("");
-
-        System.out.println(ANSI.MAGENTA + "[1] Health Ring");
-        System.out.println("HP + 5");
-        System.out.println("Fun fact: The gem is shaped like a heart.");
-        System.out.println("");
-
-        System.out.println(ANSI.RED + "[2] Strength Ring");
-        System.out.println("Strength + 5");
-        System.out.println("Fun fact: It glows like fire.");
-        System.out.println("");
-
-        System.out.println(ANSI.BLUE + "[3] Agility Ring");
-        System.out.println("Agility + 5");
-        System.out.println("Fun fact: It feels weightless.");
-        System.out.println("" + ANSI.DEFAULT);
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-        System.out.println("Enter a number from [1-3]: ");
-
-        //no choice yet
-        MagicalGirlFactory magicalGirlFactory = null;
-
-        while (true) {
-            int itemSelect = scanner.nextInt();
-
-            switch (itemSelect) {
-                case 1:
-                    System.out.println(ANSI.MAGENTA + "You chose the health power-up." + ANSI.DEFAULT);
-                    //create decorator
-                    ICombatStats addHealthRing = new HealthRingDecorator(player.getPlayerStyle());
-                    player.setPlayerStyle(addHealthRing);
-                    break; //exit the switch loop and the while loop!
-                case 2:
-                    System.out.println(ANSI.RED + "You chose the strength power-up." + ANSI.DEFAULT);
-                    ICombatStats addPowerRing = new PowerRingDecorator(player.getPlayerStyle());
-                    player.setPlayerStyle(addPowerRing);
-                    break;
-                case 3:
-                    System.out.println(ANSI.BLUE + "You chose the agility power-up." + ANSI.DEFAULT);
-                    ICombatStats addAgilityRing = new AgilityRingDecorator(player.getPlayerStyle());
-                    player.setPlayerStyle(addAgilityRing);
-                    break;
-                default:
-                    System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
-                    continue;
-            }
-            break;
-        }
-
-        //wrap around your stats
-
-    }
+//    static void DecorateCharacter(PlayerStats player) {
+//        //to take user input we use scanner class
+//        Scanner scanner = new Scanner(System.in);
+//
+//        System.out.println("Choose one of three power accessories: ");
+//        System.out.println("");
+//
+//        System.out.println(ANSI.MAGENTA + "[1] Health Ring");
+//        System.out.println("HP + 5");
+//        System.out.println("Fun fact: The gem is shaped like a heart.");
+//        System.out.println("");
+//
+//        System.out.println(ANSI.RED + "[2] Strength Ring");
+//        System.out.println("Strength + 5");
+//        System.out.println("Fun fact: It glows like fire.");
+//        System.out.println("");
+//
+//        System.out.println(ANSI.BLUE + "[3] Agility Ring");
+//        System.out.println("Agility + 5");
+//        System.out.println("Fun fact: It feels weightless.");
+//        System.out.println("" + ANSI.DEFAULT);
+//
+//        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+//
+//        System.out.println("Enter a number from [1-3]: ");
+//
+//        //no choice yet
+//        MagicalGirlFactory magicalGirlFactory = null;
+//
+//        while (true) {
+//            int itemSelect = scanner.nextInt();
+//
+//            switch (itemSelect) {
+//                case 1:
+//                    System.out.println(ANSI.MAGENTA + "You chose the health power-up." + ANSI.DEFAULT);
+//                    //create decorator
+//                    ICombatStats addHealthRing = new HealthRingDecorator(player.getPlayerStyle());
+//                    player.setPlayerStyle(addHealthRing);
+//                    break; //exit the switch loop and the while loop!
+//                case 2:
+//                    System.out.println(ANSI.RED + "You chose the strength power-up." + ANSI.DEFAULT);
+//                    ICombatStats addPowerRing = new PowerRingDecorator(player.getPlayerStyle());
+//                    player.setPlayerStyle(addPowerRing);
+//                    break;
+//                case 3:
+//                    System.out.println(ANSI.BLUE + "You chose the agility power-up." + ANSI.DEFAULT);
+//                    ICombatStats addAgilityRing = new AgilityRingDecorator(player.getPlayerStyle());
+//                    player.setPlayerStyle(addAgilityRing);
+//                    break;
+//                default:
+//                    System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
+//                    continue;
+//            }
+//            break;
+//        }
+//
+//        //wrap around your stats
+//
+//    }
     }
 
