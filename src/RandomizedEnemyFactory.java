@@ -4,7 +4,7 @@ public class RandomizedEnemyFactory extends MagicalGirlFactory {
 
     @Override
     public PlayerStats createPlayer() {
-        //array of magicalgirl fightstyles
+        //array of magical girl fight styles
         MagicalGirlFightStyle[] fightStyles = MagicalGirlFightStyle.values();
 
         Random rnd = new Random();

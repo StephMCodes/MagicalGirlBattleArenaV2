@@ -26,6 +26,10 @@ public class Main {
         System.out.println("Heal Charges: " + playerStats.getHealCharges());
         System.out.println("CC Charges: " + playerStats.getCcCharges());
 
+        //creates battle system
+        BattleSystem battleArena = new RegularBattleSystem();
+        battleArena.startBattle(playerStats); //runs battle with template design pattern
+
 
     }
 
