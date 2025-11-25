@@ -6,9 +6,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
 
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("WELCOME TO MAGICAL GIRL BATTLE ARENA");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        DisplayMenu();
 
         //IF NO SAVED GAME
         //make our player
@@ -33,8 +31,7 @@ public class Main {
 
     }
 
-    static PlayerStats MakeCharacter()
-    {
+    static PlayerStats MakeCharacter() {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
 
@@ -67,45 +64,133 @@ public class Main {
 
         //no choice yet
         MagicalGirlFactory magicalGirlFactory = null;
+//we avoid an exception if user inputs a string and not in
+        int characterSelect = 0;
 
         while (true) {
-            int characterSelect = scanner.nextInt();
 
-            switch (characterSelect) {
+            String characterSelectString = scanner.nextLine();
+
+            while (true) {
+                try {
+                    characterSelect = Integer.parseInt(characterSelectString);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
+                    characterSelectString = scanner.nextLine();
+
+                }
+            }
+            while (true) {
+
+                switch (characterSelect) {
+                    case 1:
+                        magicalGirlFactory = new EsmeFactory();
+                        System.out.println(ANSI.BLUE + "You chose Esme - Sharpshooter");
+                        System.out.println("'Nothing I can't do.'" + ANSI.DEFAULT);
+
+
+                        GameManager.getInstance().setPlayerName("Esme");
+
+                        break; //exit the switch loop and the while loop!
+                    case 2:
+                        magicalGirlFactory = new AstridFactory();
+                        System.out.println(ANSI.RED + "You chose Astrid - Jumbo Hammer");
+                        System.out.println("'ALRIGHT, LET'S GET KICKING!!!'" + ANSI.DEFAULT);
+
+
+                        GameManager.getInstance().setPlayerName("Astrid");
+
+                        break;
+                    case 3:
+                        magicalGirlFactory = new IrisFactory();
+                        System.out.println(ANSI.MAGENTA + "You chose Iris - Dark Mage");
+                        System.out.println("'I plan for every outcome.'" + ANSI.DEFAULT);
+
+
+                        GameManager.getInstance().setPlayerName("Iris");
+
+                        break;
+                    case 4:
+                        magicalGirlFactory = new EvangelineFactory();
+                        System.out.println(ANSI.YELLOW + "You chose Evangeline - Light Mage");
+                        System.out.println("'Let's show them what I got!'" + ANSI.DEFAULT);
+
+                        GameManager.getInstance().setPlayerName("Evangeline");
+
+                        break;
+                    default:
+                        System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
+                        continue;
+                }
+                break;
+            }
+
+            //magical girl factory chosen now creates player
+            return magicalGirlFactory.createPlayer();
+        }
+    }
+
+    static void DisplayMenu()
+    {
+        //to take user input we use scanner class
+        Scanner scanner = new Scanner(System.in);
+
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("WELCOME TO MAGICAL GIRL BATTLE ARENA");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("Choose one out of four magical girl characters, each with their own name, stats and abilities, to enter into the arena.");
+        System.out.println("You then battle the remaining characters to determine who is the champion that will walk away with a magical artefact!");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("[1] Start Base Game");
+        System.out.println("[2] Start Double Game Mode");
+        System.out.println("[3] Start Endless Game Mode");
+        System.out.println("[4] View Credits");
+        System.out.println("");
+
+        //we avoid an exception if user inputs a string and not in
+        int menuSelect = 0;
+
+        while (true) {
+
+            System.out.println("Enter [1-4]: ");
+            String menuSelectString = scanner.nextLine();
+
+            while (true) {
+                try {
+                    menuSelect = Integer.parseInt(menuSelectString);
+                    break;
+                } catch (Exception e) {
+                    System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
+                    menuSelectString = scanner.nextLine();
+
+                }
+            }
+
+            switch (menuSelect) {
                 case 1:
-                    magicalGirlFactory = new EsmeFactory();
-                    System.out.println(ANSI.BLUE + "You chose Esme - Sharpshooter");
-                    System.out.println("'Nothing I can't do.'" + ANSI.DEFAULT);
-
-
-                    GameManager.getInstance().setPlayerName("Esme");
+                    //start game
 
                     break; //exit the switch loop and the while loop!
                 case 2:
-                    magicalGirlFactory = new AstridFactory();
-                    System.out.println(ANSI.RED + "You chose Astrid - Jumbo Hammer");
-                    System.out.println("'ALRIGHT, LET'S GET KICKING!!!'" + ANSI.DEFAULT);
-
-
-                    GameManager.getInstance().setPlayerName("Astrid");
+                    //start game mode 2
 
                     break;
                 case 3:
-                    magicalGirlFactory = new IrisFactory();
-                    System.out.println(ANSI.MAGENTA + "You chose Iris - Dark Mage");
-                    System.out.println("'I plan for every outcome.'" + ANSI.DEFAULT);
-
-
-                    GameManager.getInstance().setPlayerName("Iris");
+                    //start game mode 3
 
                     break;
                 case 4:
-                    magicalGirlFactory = new EvangelineFactory();
-                    System.out.println(ANSI.YELLOW + "You chose Evangeline - Light Mage");
-                    System.out.println("'Let's show them what I got!'" + ANSI.DEFAULT);
+                    System.out.println("PROGRAMMERS:");
+                    System.out.println(ANSI.MAGENTA + "Bella Perez");
+                    System.out.println(ANSI.RED + "Ruth Garcia");
+                    System.out.println(ANSI.BLUE + "Stephanie Michiu" + ANSI.DEFAULT);
 
-                    GameManager.getInstance().setPlayerName("Evangeline");
-
+                    System.out.println("Thank you for playing our game.");
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    DisplayMenu();
                     break;
                 default:
                     System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
@@ -113,9 +198,6 @@ public class Main {
             }
             break;
         }
-
-        //magical girl factory chosen now creates player
-        return magicalGirlFactory.createPlayer();
     }
 
 //    static void DecorateCharacter(PlayerStats player) {
