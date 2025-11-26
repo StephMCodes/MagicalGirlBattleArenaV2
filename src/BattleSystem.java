@@ -81,6 +81,8 @@ public abstract class BattleSystem {
         System.out.println("[1] Attack"); //damage
         System.out.println("[2] Heal " + playerStats.getHealCharges() + " left"); //heal if available
         System.out.println("[3] Use CC " + playerStats.getCcCharges() + " left");//concuss
+        System.out.println("[4] Save Game");
+        System.out.println("[5] Load Game");
 
         int choice = scanner.nextInt();
 
@@ -103,8 +105,17 @@ public abstract class BattleSystem {
                 System.out.println("You concussed your opponent!");
                 break;
 
+                //save during game
+            case 4:
+                GameManager.getInstance().saveGame(playerStats);
+                break;
+            //load during game
+            case 5:
+                GameManager.getInstance().loadGame(playerStats);
+                break;
+
             default:
-                System.out.println("[INVALID INPUT] Enter a number from 1-3:");
+                System.out.println("[INVALID INPUT] Enter a number from 1-5:");
                 break;
 
         }
@@ -213,16 +224,16 @@ public abstract class BattleSystem {
     //win or lose display
     protected void sayWinner(PlayerStats playerStats, PlayerStats magicalGirlEnemy){
 
+        GameManager gm = GameManager.getInstance();
         //alive you win or die ya lose
         if (playerStats.isAlive()){
-            System.out.println("\nYou won the battle! ");
+            gm.winGame(); // display the message when you win from Game Manager
         }
         else {
-            System.out.println("\nYou were defeated");
+           gm.LoseGame(); //display the message when you lose from Game Manager
         }
 
 }
-
 
 
 }
