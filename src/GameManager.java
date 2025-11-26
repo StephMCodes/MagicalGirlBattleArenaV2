@@ -1,4 +1,4 @@
-public class GameManager
+public class GameManager //singleton design pattern
 {
     private static GameManager instance;
 
@@ -6,6 +6,8 @@ public class GameManager
     private boolean gameLose;
 
     private String playerName;
+
+    private PlayerSaveData saveData;
 
     private GameManager()
     {
@@ -28,18 +30,38 @@ public class GameManager
         this.playerName = name;
     }
 
+    public void saveGame(PlayerStats player)
+    {
+        saveData = player.createSaveData();
+        System.out.println(" Game has been saved!!");
+
+    }
+
+    public void loadGame(PlayerStats player)
+    {
+        if(saveData == null)
+        {
+            System.out.println("Game has been not found. Please save a game first.");
+            return;
+        }
+        player.restoreSaveData(saveData);
+        System.out.println("Loading the game!!");
+    }
+
+    //winning logic
     public void winGame()
     {
         gameWon = true;
         gameLose = true;
-        System.out.println( playerName + "YOU WIN THE BATTLE! :D ");
+        System.out.println( playerName + " WINS THE BATTLE! :D ");
     }
 
+    //losing logic
     public void LoseGame()
     {
         gameWon = false;
         gameLose = true;
-        System.out.println( playerName + " YOU LOST THE BATTLE...:( ");
+        System.out.println( playerName + " LOST THE BATTLE...:( ");
     }
 
     public boolean isGameOver()

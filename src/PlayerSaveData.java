@@ -1,7 +1,10 @@
 public class PlayerSaveData {
+
+
     private final int currentHealth;
     private final int healCharges;
     private final int ccCharges;
+
 
     public PlayerSaveData(int currentHealth, int healCharges, int ccCharges)
     {

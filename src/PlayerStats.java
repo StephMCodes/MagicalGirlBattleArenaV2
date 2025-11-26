@@ -17,11 +17,13 @@ public class PlayerStats {
         this.currentHealth = fightStyle.getMaxHealth();
     }
 
+    //it saves a copy of the player stats
     public PlayerSaveData createSaveData()
     {
         return new PlayerSaveData(currentHealth, healCharges, ccCharges);
     }
 
+    //it restores back the player stats
     public void restoreSaveData(PlayerSaveData saveData)
     {
         this.currentHealth = saveData.getCurrentHealth();
