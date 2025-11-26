@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GameManager //singleton design pattern
 {
     private static GameManager instance;
@@ -28,6 +30,30 @@ public class GameManager //singleton design pattern
     public void setPlayerName(String name)
     {
         this.playerName = name;
+    }
+
+    public void Pause(PlayerStats playerStats)
+    {
+        Scanner scanner = new Scanner(System.in);
+
+        while(true)
+        {
+            System.out.println("\n === PAUSE MENU ===");
+            System.out.println("[1] Resume Game");
+            System.out.println("[2] Exit Game");
+
+            String input = scanner.nextLine();
+
+            switch (input)
+            {
+                case "1": System.out.println("Resuming Game...");
+                return;
+
+                case "2": System.out.println("Thank you for playing! You can come back anytime :D!");
+                System.exit(0);
+                default: System.out.println("Invalid, please enter 1-2.");
+            }
+        }
     }
 
     public void saveGame(PlayerStats player)
