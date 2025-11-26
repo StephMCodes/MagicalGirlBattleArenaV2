@@ -7,7 +7,6 @@ public abstract class BattleSystem {
     //final to amke sure subclasses don't interfere
     public final void startBattle(PlayerStats playerStats){
 
-        System.out.println("Press [P] anytime you want to pause!");
         //create enemy from subclass regular battle atm
         PlayerStats magicalGirlEnemy = createMagicalGirlEnemy();
 
@@ -34,7 +33,6 @@ public abstract class BattleSystem {
 
         //loops and checks that everyone is alive
         while (playerStats.isAlive()&& magicalGirlEnemy.isAlive()){
-
             //mc's turn
             if(currentTurn == playerStats){
 
@@ -78,15 +76,6 @@ public abstract class BattleSystem {
 
     //magical girl player's choices
     protected void playerTurn(PlayerStats playerStats, PlayerStats magicalGirlEnemy,Scanner scanner){
-
-       // String input = scanner.nextLine();
-
-       // if(input.equalsIgnoreCase("P"))
-       // {
-        //    GameManager.getInstance().Pause(playerStats);
-        //    input = scanner.nextLine();
-       // }
-
 
         System.out.println("\n It's your turn! How will you proceed..." );
         System.out.println("[1] Attack"); //damage
