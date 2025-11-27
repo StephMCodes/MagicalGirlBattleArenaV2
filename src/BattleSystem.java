@@ -4,6 +4,9 @@ import java.util.Scanner;
 //using template method
 public abstract class BattleSystem {
 
+    //factory design pattern for enemies
+    protected abstract PlayerStats createMagicalGirlEnemy(PlayerStats playerStats);
+
     //final to make sure subclasses don't interfere
     public final void startBattle(PlayerStats playerStats) {
 
@@ -11,11 +14,11 @@ public abstract class BattleSystem {
         Scanner scanner = new Scanner(System.in);
 
         //create enemy from subclass regular battle atm
-        PlayerStats magicalGirlEnemy = createMagicalGirlEnemy();
+        PlayerStats magicalGirlEnemy = createMagicalGirlEnemy(playerStats);
 
-        System.out.println("Your magical girl opponent appears..." + magicalGirlEnemy);
+        System.out.println("Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
         //shows health of enemy magic girl
-        System.out.println("Your opponents HP is " + magicalGirlEnemy.getCurrentHealth());
+        System.out.println("Your opponent " + magicalGirlEnemy.getName() + " is at " + magicalGirlEnemy.getCurrentHealth() + "HP");
 
 
         //decides who goes first
@@ -75,9 +78,6 @@ public abstract class BattleSystem {
 
     }
 
-    //factory design pattern for enemies
-    protected abstract PlayerStats createMagicalGirlEnemy();
-
     //magical girl player's choices
     protected void playerTurn(PlayerStats playerStats, PlayerStats magicalGirlEnemy, Scanner scanner) {
 
@@ -116,7 +116,7 @@ public abstract class BattleSystem {
                 //heal
                 case 2:
                     int healAmount = playerStats.heal();
-                    System.out.println(ANSI.BLUE + "You healed... phew!" + healAmount + " HP!" + ANSI.DEFAULT);
+                    System.out.println(ANSI.BLUE + "Phew!... You healed for " + healAmount + "HP !" + ANSI.DEFAULT);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     return;
@@ -227,7 +227,7 @@ public abstract class BattleSystem {
         //if cc is 20 or less + have a charge left it attacks
         if (enemyAction <= 20 && magicalGirlEnemy.getCcCharges() > 0) {
             magicalGirlEnemy.useCC(playerStats);
-            System.out.println(ANSI.YELLOW + "Your opponent used concuss on you. You skip a turn!" + ANSI.DEFAULT);
+            System.out.println(ANSI.YELLOW + "Your opponent " + magicalGirlEnemy.getName() + " used concuss on you. You skip a turn!" + ANSI.DEFAULT);
             System.out.println("Press [ENTER] to continue.");
             scanner.nextLine();
             return;
@@ -236,7 +236,7 @@ public abstract class BattleSystem {
 
         int dmg = magicalGirlEnemy.Damage(); //enemy calculates damage
         playerStats.getHit(dmg);
-        System.out.println(ANSI.RED + "The magical girl opponent attacked you for " + dmg + " damage!" + ANSI.DEFAULT);
+        System.out.println(ANSI.RED + "The magical girl opponent " +magicalGirlEnemy.getName() + "attacked you for " + dmg + " damage!" + ANSI.DEFAULT);
         System.out.println("Press [ENTER] to continue.");
         scanner.nextLine();
     }
@@ -266,9 +266,9 @@ public abstract class BattleSystem {
 
         //alive you win or die ya lose
         if (playerStats.isAlive()) {
-            System.out.println("\nYou won the battle! ");
+            System.out.println("\nYou won the battle against" + magicalGirlEnemy.getName() + "!");
         } else {
-            System.out.println("\nYou were defeated...");
+            System.out.println("\nYou were defeated by " + magicalGirlEnemy.getName() + " ...");
         }
 
     }

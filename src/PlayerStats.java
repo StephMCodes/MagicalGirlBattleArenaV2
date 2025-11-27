@@ -106,6 +106,11 @@ public class PlayerStats {
         return fightStyle.getMaxHealth();
     }
 
+    //get name of magical girl method
+    public String getName(){
+        return fightStyle.getName();
+    }
+
     //all opponents skip their next turn when cc'd
     public void useCC(PlayerStats magicalGirl){
         if (ccCharges <= 0 ){
