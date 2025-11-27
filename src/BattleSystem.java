@@ -115,8 +115,8 @@ public abstract class BattleSystem {
                     return;
                 //heal
                 case 2:
-                    playerStats.heal();
-                    System.out.println(ANSI.BLUE + "You healed... phew!" + ANSI.DEFAULT);
+                    int healAmount = playerStats.heal();
+                    System.out.println(ANSI.BLUE + "You healed... phew!" + healAmount + " HP!" + ANSI.DEFAULT);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     return;
