@@ -8,4 +8,9 @@ public class AgilityRingDecorator extends CharacterDecorator{
     {
         return super.getAgility() + 5;
     }
+
+    @Override
+    public String getName() {
+        return combatStats.getName();
+    }
 }
