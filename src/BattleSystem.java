@@ -16,7 +16,25 @@ public abstract class BattleSystem {
         //create enemy from subclass regular battle atm
         PlayerStats magicalGirlEnemy = createMagicalGirlEnemy(playerStats);
 
-        System.out.println("Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
+        System.out.println(playerStats.getPlayerStyle());
+        //custom intro
+        if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+            System.out.println(ANSI.BLUE + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
+            System.out.println("She has sharp aim, be careful!" + ANSI.DEFAULT);
+
+        } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+            System.out.println(ANSI.RED + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
+            System.out.println("She has a fiery spirit, be careful!" + ANSI.DEFAULT);
+
+        } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+
+            System.out.println(ANSI.MAGENTA + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
+            System.out.println("She has lots of knowledge, be careful!" + ANSI.DEFAULT);
+        } else {
+            System.out.println(ANSI.YELLOW + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
+            System.out.println("She has a kind smile, but is a veteran, be careful!" + ANSI.DEFAULT);
+
+        }
         //shows health of enemy magic girl
         System.out.println("Your opponent " + magicalGirlEnemy.getName() + " is at " + magicalGirlEnemy.getCurrentHealth() + "HP");
 
@@ -82,9 +100,9 @@ public abstract class BattleSystem {
     protected void playerTurn(PlayerStats playerStats, PlayerStats magicalGirlEnemy, Scanner scanner) {
 
         System.out.println("\nIt's your turn! How will you proceed...");
-        System.out.println(ANSI.RED+"[1] Attack"); //damage
-        System.out.println(ANSI.BLUE+"[2] Heal " + playerStats.getHealCharges() + " left"); //heal if available
-        System.out.println(ANSI.YELLOW+"[3] Use CC " + playerStats.getCcCharges() + " left" + ANSI.DEFAULT);//concuss
+        System.out.println(ANSI.RED + "[1] Attack"); //damage
+        System.out.println(ANSI.BLUE + "[2] Heal " + playerStats.getHealCharges() + " left"); //heal if available
+        System.out.println(ANSI.YELLOW + "[3] Use CC " + playerStats.getCcCharges() + " left" + ANSI.DEFAULT);//concuss
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         System.out.println("Enter a number from [1-3]: ");
@@ -109,6 +127,20 @@ public abstract class BattleSystem {
                 case 1:
                     int dmg = playerStats.Damage();
                     magicalGirlEnemy.getHit(dmg);
+                    //custom attack
+                    if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+                        System.out.println(ANSI.BLUE + "You aim is true! BANG!" + ANSI.DEFAULT);
+
+                    } else if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+                        System.out.println(ANSI.RED + "Your hammer comes down with a BAM!" + ANSI.DEFAULT);
+
+                    } else if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+
+                        System.out.println(ANSI.MAGENTA + "You call unseen forces to hex your opponent!" + ANSI.DEFAULT);
+
+                    } else {
+                        System.out.println(ANSI.YELLOW + "Your radiant beam strikes with cleansing power!" + ANSI.DEFAULT);
+                    }
                     System.out.println(ANSI.RED + "You have hit your opponent for " + dmg + " damage!" + ANSI.DEFAULT);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
@@ -137,7 +169,9 @@ public abstract class BattleSystem {
     protected void DecorateCharacter(PlayerStats player) {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Congratulations! For besting your opponent in battle, the arena grants you an item!");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Choose one of three power accessories: ");
         System.out.println("");
 
@@ -170,50 +204,49 @@ public abstract class BattleSystem {
 
             String itemString = scanner.nextLine();
 
-                try {
-                    itemSelect = Integer.parseInt(itemString);
-                    break;
-                } catch (Exception e) {
-                    System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
-                }
-            }
-
-
-
-            while (true) {
-
-                switch (itemSelect) {
-                    case 1:
-                        System.out.println(ANSI.MAGENTA + "You chose the health power-up." + ANSI.DEFAULT);
-                        //create decorator
-                        ICombatStats addHealthRing = new HealthRingDecorator(player.getPlayerStyle());
-                        player.setPlayerStyle(addHealthRing);
-                        System.out.println("Press [ENTER] to continue.");
-                        scanner.nextLine();
-                        break; //exit the switch loop and the while loop!
-                    case 2:
-                        System.out.println(ANSI.RED + "You chose the strength power-up." + ANSI.DEFAULT);
-                        ICombatStats addPowerRing = new PowerRingDecorator(player.getPlayerStyle());
-                        player.setPlayerStyle(addPowerRing);
-                        System.out.println("Press [ENTER] to continue.");
-                        scanner.nextLine();
-                        break;
-                    case 3:
-                        System.out.println(ANSI.BLUE + "You chose the agility power-up." + ANSI.DEFAULT);
-                        ICombatStats addAgilityRing = new AgilityRingDecorator(player.getPlayerStyle());
-                        player.setPlayerStyle(addAgilityRing);
-                        System.out.println("Press [ENTER] to continue.");
-                        scanner.nextLine();
-                        break;
-                    default:
-                        System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
-                        continue;
-                }
+            try {
+                itemSelect = Integer.parseInt(itemString);
                 break;
-
+            } catch (Exception e) {
+                System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
             }
-            //wrap around your stats
         }
+
+
+        while (true) {
+
+            switch (itemSelect) {
+                case 1:
+                    System.out.println(ANSI.MAGENTA + "You chose the Health power-up." + ANSI.DEFAULT);
+                    //create decorator
+                    ICombatStats addHealthRing = new HealthRingDecorator(player.getPlayerStyle());
+                    player.setPlayerStyle(addHealthRing);
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    break; //exit the switch loop and the while loop!
+                case 2:
+                    System.out.println(ANSI.RED + "You chose the Strength power-up." + ANSI.DEFAULT);
+                    ICombatStats addPowerRing = new PowerRingDecorator(player.getPlayerStyle());
+                    player.setPlayerStyle(addPowerRing);
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    break;
+                case 3:
+                    System.out.println(ANSI.BLUE + "You chose the Agility power-up." + ANSI.DEFAULT);
+                    ICombatStats addAgilityRing = new AgilityRingDecorator(player.getPlayerStyle());
+                    player.setPlayerStyle(addAgilityRing);
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    break;
+                default:
+                    System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
+                    continue;
+            }
+            break;
+
+        }
+        //wrap around your stats
+    }
 
 
     //magical girl enemy turn
@@ -236,7 +269,21 @@ public abstract class BattleSystem {
 
         int dmg = magicalGirlEnemy.Damage(); //enemy calculates damage
         playerStats.getHit(dmg);
-        System.out.println(ANSI.RED + "The magical girl opponent " +magicalGirlEnemy.getName() + "attacked you for " + dmg + " damage!" + ANSI.DEFAULT);
+        //custom attack enemy
+        if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+            System.out.println(ANSI.BLUE + "BANG! Too slow, it hits you!" + ANSI.DEFAULT);
+
+        } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+            System.out.println(ANSI.RED + "It's a dizzying hit from her hammer, and the ground cracks beneath it!" + ANSI.DEFAULT);
+
+        } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+
+            System.out.println(ANSI.MAGENTA + "You feel your life force drain from you! How can a book hurt so much?" + ANSI.DEFAULT);
+
+        } else {
+            System.out.println(ANSI.YELLOW + "They may be shiny, but those sparkles sting!" + ANSI.DEFAULT);
+        }
+        System.out.println(ANSI.RED + "The magical girl opponent " + magicalGirlEnemy.getName() + " attacked you for " + dmg + " damage!" + ANSI.DEFAULT);
         System.out.println("Press [ENTER] to continue.");
         scanner.nextLine();
     }
@@ -256,19 +303,53 @@ public abstract class BattleSystem {
     //displays health after each turn
     protected void printStatus(PlayerStats playerStats, PlayerStats magicalGirlEnemy) {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~ HEALTH STATUS ~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(ANSI.MAGENTA +"Your HP: " + playerStats.getCurrentHealth());
+        System.out.println(ANSI.MAGENTA + "Your HP: " + playerStats.getCurrentHealth());
         System.out.println("Opponent HP: " + magicalGirlEnemy.getCurrentHealth());
         System.out.println(ANSI.DEFAULT + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     //win or lose display
     protected void sayWinner(PlayerStats playerStats, PlayerStats magicalGirlEnemy) {
-
+//to take user input we use scanner class
+        Scanner scanner = new Scanner(System.in);
         //alive you win or die ya lose
         if (playerStats.isAlive()) {
-            System.out.println("\nYou won the battle against" + magicalGirlEnemy.getName() + "!");
+            System.out.println("\nYou won the battle against " + magicalGirlEnemy.getName() + "!");
+            //custom msg enemy
+            if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+                System.out.println(ANSI.BLUE + "Esme pushes up her glasses with a disappointed look on her face." + ANSI.DEFAULT);
+
+            } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+                System.out.println(ANSI.RED + "Astrid immediately starts breaking things, only taking a moment to shake your hand good-naturedly before breaking more stuff." + ANSI.DEFAULT);
+
+            } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+
+                System.out.println(ANSI.MAGENTA + "Iris remains on the ground, hurriedly writing down how she can improve next time. Best not to disturb her..." + ANSI.DEFAULT);
+
+            } else {
+                System.out.println(ANSI.YELLOW + "Evangeline has a teary sheen to her eyes, but she smiles and congratulates you on your victory." + ANSI.DEFAULT);
+            }
+            System.out.println("Press [ENTER] to continue.");
+            scanner.nextLine();
+
         } else {
             System.out.println("\nYou were defeated by " + magicalGirlEnemy.getName() + " ...");
+            //custom msg enemy
+            if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+                System.out.println(ANSI.BLUE + "Esme helps you up and tells you to keep trying. It's hard to be mad when she's so cool..." + ANSI.DEFAULT);
+
+            } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+                System.out.println(ANSI.RED + "Astrid laughs boisterously, already asking you for another go." + ANSI.DEFAULT);
+
+            } else if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+
+                System.out.println(ANSI.MAGENTA + "Iris offers you a dark flower as consolation and some notes on your fighting." + ANSI.DEFAULT);
+
+            } else {
+                System.out.println(ANSI.YELLOW + "Evangeline offers you consolation sugar cookies." + ANSI.DEFAULT);
+            }
+            System.out.println("Press [ENTER] to continue.");
+            scanner.nextLine();
         }
 
     }
