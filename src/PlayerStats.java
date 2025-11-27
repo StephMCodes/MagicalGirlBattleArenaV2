@@ -58,12 +58,20 @@ public class PlayerStats {
         currentHealth = Math.max(0,currentHealth - damage); //compares result to 0 takes bigger value
     }
 
-    public void heal(){
+    public int heal(){
         //more than 0 heal charges. based on fight style get ur max health and health atm. Heals for 20
-        if(healCharges > 0){
-            currentHealth = Math.min(fightStyle.getMaxHealth(),currentHealth + healAmount); //min will take the smaller value of the two
-            healCharges--;
+        if(healCharges <= 0){
+
+            return 0; //healed nada
         }
+
+        //stores health
+        int previousHealth = currentHealth;
+
+        currentHealth = Math.min(fightStyle.getMaxHealth(),currentHealth + healAmount); //min will take the smaller value of the two
+        healCharges--;
+
+        return currentHealth - previousHealth; // returns healed amount
     }
 
     //checks signs of life lol
