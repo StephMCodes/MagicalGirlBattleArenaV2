@@ -5,6 +5,6 @@ public class RegularBattleSystem extends BattleSystem {
 
         //creates randomized enemy factory
         RandomizedEnemyFactory enemyFactory = new RandomizedEnemyFactory(playerStats.getPlayerStyle());
-        return enemyFactory.createPlayer(); //returns enemy as an object
+        return enemyFactory.createPlayer(playerStats.ogStyle); //returns enemy as an object
     }
 }

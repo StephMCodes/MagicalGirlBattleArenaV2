@@ -3,7 +3,7 @@ import java.util.Random;
 public class PlayerStats {
 
     private ICombatStats fightStyle;
-    public static String ogStyle;
+    public static MagicalGirlFightStyle ogStyle;
     private int currentHealth;
     private int healCharges = 3;
     private int healAmount = 20;

@@ -73,9 +73,9 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Esme");
-                    PlayerStats.ogStyle = "gun";
+                    PlayerStats.ogStyle = MagicalGirlFightStyle.gun;
 
-                    return magicalGirlFactory.createPlayer();
+                    return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.gun);
                 //exit the switch loop and the while loop!
                 case 2:
                     magicalGirlFactory = new AstridFactory();
@@ -88,8 +88,8 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Astrid");
-                    PlayerStats.ogStyle = "hammer";
-                    return magicalGirlFactory.createPlayer();
+                    PlayerStats.ogStyle = MagicalGirlFightStyle.jumboHammer;
+                    return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.jumboHammer);
 
                 case 3:
                     magicalGirlFactory = new IrisFactory();
@@ -102,9 +102,9 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Iris");
-                    PlayerStats.ogStyle = "darkMagic";
+                    PlayerStats.ogStyle = MagicalGirlFightStyle.darkMagic;
 
-                    return magicalGirlFactory.createPlayer();
+                    return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.darkMagic);
 
                 case 4:
                     magicalGirlFactory = new EvangelineFactory();
@@ -116,9 +116,9 @@ public class Main {
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     GameManager.getInstance().setPlayerName("Evangeline");
-                    PlayerStats.ogStyle = "lightMagic";
+                    PlayerStats.ogStyle = MagicalGirlFightStyle.lightMagic;
 
-                    return magicalGirlFactory.createPlayer();
+                    return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.lightMagic);
                 default:
                     System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
                     break;
@@ -169,19 +169,6 @@ public class Main {
                     //start game
                     //make our player
                     PlayerStats playerStats = MakeCharacter();
-
-
-
-                    //after we finish a battle let the player get a powerup of choice
-                    //DecorateCharacter(playerStats);
-
-                    /*System.out.println("Player Base Style: " + playerStats.getPlayerStyle());
-                    System.out.println("Max Health: " + playerStats.getHealth());
-                    System.out.println("Current Health: " + playerStats.getCurrentHealth());
-                    System.out.println("Strength: " + playerStats.getStrength());
-                    System.out.println("Agility: " + playerStats.getAgility());
-                    System.out.println("Heal Charges: " + playerStats.getHealCharges());
-                    System.out.println("CC Charges: " + playerStats.getCcCharges());*/
 
                     //creates battle system
                     BattleSystem battleArena = new RegularBattleSystem();

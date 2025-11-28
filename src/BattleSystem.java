@@ -131,13 +131,13 @@ public abstract class BattleSystem {
                     int dmg = playerStats.Damage();
                     magicalGirlEnemy.getHit(dmg);
                     //custom attack
-                    if (playerStats.ogStyle == "gun") {
+                    if (playerStats.ogStyle == MagicalGirlFightStyle.gun) {
                         System.out.println(ANSI.BLUE + "You aim is true! BANG!" + ANSI.DEFAULT);
 
-                    } else if (playerStats.ogStyle == "hammer") {
+                    } else if (playerStats.ogStyle == MagicalGirlFightStyle.jumboHammer) {
                         System.out.println(ANSI.RED + "Your hammer comes down with a BAM!" + ANSI.DEFAULT);
 
-                    } else if (playerStats.ogStyle == "darkMagic") {
+                    } else if (playerStats.ogStyle == MagicalGirlFightStyle.darkMagic) {
 
                         System.out.println(ANSI.MAGENTA + "You call unseen forces to hex your opponent!" + ANSI.DEFAULT);
 
