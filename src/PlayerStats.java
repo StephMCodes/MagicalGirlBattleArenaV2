@@ -30,6 +30,10 @@ public class PlayerStats {
         this.healCharges = saveData.getHealCharges();
         this.ccCharges = saveData.getCcCharges();
     }
+    //get name of magical girl method
+    public String getName(){
+        return fightStyle.getName();
+    }
 
     public ICombatStats getPlayerStyle()
     {
