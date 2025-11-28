@@ -76,7 +76,7 @@ public abstract class BattleSystem {
 
                 //if magical girl opponent is cc'd it skips their turn
                 if (magicalGirlEnemy.skipTurn()) {
-                    System.out.println(ANSI.YELLOW + "Aha! Your opponent is concussed and loses their turn!" + ANSI.YELLOW);
+                    System.out.println(ANSI.YELLOW + "Aha! Your opponent is concussed and loses their turn!" + ANSI.DEFAULT);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                 } else {
