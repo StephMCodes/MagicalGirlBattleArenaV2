@@ -103,6 +103,8 @@ public abstract class BattleSystem {
         System.out.println(ANSI.RED + "[1] Attack"); //damage
         System.out.println(ANSI.BLUE + "[2] Heal " + playerStats.getHealCharges() + " left"); //heal if available
         System.out.println(ANSI.YELLOW + "[3] Use CC " + playerStats.getCcCharges() + " left" + ANSI.DEFAULT);//concuss
+        System.out.println("[4] Save Game");
+        System.out.println("[5] Load Game");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
         System.out.println("Enter a number from [1-3]: ");
@@ -159,6 +161,16 @@ public abstract class BattleSystem {
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     return;
+
+                //save during game
+                case 4:
+                    GameManager.getInstance().saveGame(playerStats);
+                    break;
+                //load during game
+                case 5:
+                    GameManager.getInstance().loadGame(playerStats);
+                    break;
+
                 default:
                     System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
                     break;
