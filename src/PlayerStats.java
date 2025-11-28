@@ -3,6 +3,7 @@ import java.util.Random;
 public class PlayerStats {
 
     private ICombatStats fightStyle;
+    public static String ogStyle;
     private int currentHealth;
     private int healCharges = 3;
     private int healAmount = 20;
@@ -113,18 +114,17 @@ public class PlayerStats {
     //all opponents skip their next turn when cc'd
     public void useCC(PlayerStats magicalGirl){
         if (ccCharges <= 0 ){
-            System.out.println("no cc's left :( ");
+            System.out.println("No more CC charges! Try something else... :(");
             return;
         }
+        else {
 
-        magicalGirl.concussed = true;
-
-        //cc'd 1/2 of base attack dmg
-        int ccDamage = fightStyle.getStrength() /2;
-        magicalGirl.getHit(ccDamage);
-        System.out.println("Concuss attack did " + ccDamage + " damage!");
-
-        ccCharges--;
+            magicalGirl.concussed = true;
+            //cc'd 1/2 of base attack dmg
+            int ccDamage = fightStyle.getStrength() / 2;
+            magicalGirl.getHit(ccDamage);
+            ccCharges--;
+        }
 
     }
 

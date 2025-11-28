@@ -73,6 +73,7 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Esme");
+                    PlayerStats.ogStyle = "gun";
 
                     return magicalGirlFactory.createPlayer();
                 //exit the switch loop and the while loop!
@@ -87,7 +88,7 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Astrid");
-
+                    PlayerStats.ogStyle = "hammer";
                     return magicalGirlFactory.createPlayer();
 
                 case 3:
@@ -101,6 +102,7 @@ public class Main {
                     scanner.nextLine();
 
                     GameManager.getInstance().setPlayerName("Iris");
+                    PlayerStats.ogStyle = "darkMagic";
 
                     return magicalGirlFactory.createPlayer();
 
@@ -114,6 +116,7 @@ public class Main {
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     GameManager.getInstance().setPlayerName("Evangeline");
+                    PlayerStats.ogStyle = "lightMagic";
 
                     return magicalGirlFactory.createPlayer();
                 default:
@@ -189,9 +192,10 @@ public class Main {
                         System.out.println("\n~~~~~~~~~~~~~BATTLE " + i + "~~~~~~~~~~~~~");
 
                         battleArena.startBattle(playerStats); //runs battle with template design pattern
-                        playerStats.resetStats(); //resets heals and cc's
                         //decorate after resetting your health
                         battleArena.DecorateCharacter(playerStats); //decorates stats
+                        playerStats.resetStats(); //resets heals and cc's
+
                 }
                     break; //exit the switch loop and the while loop!
                 case 2:

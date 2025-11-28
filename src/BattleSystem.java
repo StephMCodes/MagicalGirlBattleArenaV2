@@ -17,6 +17,7 @@ public abstract class BattleSystem {
         PlayerStats magicalGirlEnemy = createMagicalGirlEnemy(playerStats);
 
         System.out.println(playerStats.getPlayerStyle());
+        System.out.println(playerStats.getPlayerStyle().getMaxHealth());
         //custom intro
         if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
             System.out.println(ANSI.BLUE + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
@@ -128,13 +129,13 @@ public abstract class BattleSystem {
                     int dmg = playerStats.Damage();
                     magicalGirlEnemy.getHit(dmg);
                     //custom attack
-                    if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.gun) {
+                    if (playerStats.ogStyle == "gun") {
                         System.out.println(ANSI.BLUE + "You aim is true! BANG!" + ANSI.DEFAULT);
 
-                    } else if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.jumboHammer) {
+                    } else if (playerStats.ogStyle == "hammer") {
                         System.out.println(ANSI.RED + "Your hammer comes down with a BAM!" + ANSI.DEFAULT);
 
-                    } else if (playerStats.getPlayerStyle() == MagicalGirlFightStyle.darkMagic) {
+                    } else if (playerStats.ogStyle == "darkMagic") {
 
                         System.out.println(ANSI.MAGENTA + "You call unseen forces to hex your opponent!" + ANSI.DEFAULT);
 
@@ -155,7 +156,6 @@ public abstract class BattleSystem {
                 //cc
                 case 3:
                     playerStats.useCC(magicalGirlEnemy);
-                    System.out.println(ANSI.YELLOW + "You concussed your opponent with a hit to the head!" + ANSI.DEFAULT);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     return;
@@ -259,7 +259,7 @@ public abstract class BattleSystem {
 
         //if cc is 20 or less + have a charge left it attacks
         if (enemyAction <= 20 && magicalGirlEnemy.getCcCharges() > 0) {
-            magicalGirlEnemy.useCC(playerStats);
+            magicalGirlEnemy.useCC(magicalGirlEnemy);
             System.out.println(ANSI.YELLOW + "Your opponent " + magicalGirlEnemy.getName() + " used concuss on you. You skip a turn!" + ANSI.DEFAULT);
             System.out.println("Press [ENTER] to continue.");
             scanner.nextLine();
