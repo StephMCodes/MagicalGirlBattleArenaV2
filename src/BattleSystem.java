@@ -8,7 +8,7 @@ public abstract class BattleSystem {
     protected abstract PlayerStats createMagicalGirlEnemy(PlayerStats playerStats);
 
     //final to make sure subclasses don't interfere
-    public final void startBattle(PlayerStats playerStats) {
+    public final boolean startBattle(PlayerStats playerStats) {
 
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
@@ -16,8 +16,10 @@ public abstract class BattleSystem {
         //create enemy from subclass regular battle atm
         PlayerStats magicalGirlEnemy = createMagicalGirlEnemy(playerStats);
 
-        System.out.println(playerStats.getPlayerStyle());
-        System.out.println(playerStats.getPlayerStyle().getMaxHealth());
+        //DEBUG
+        //System.out.println(playerStats.getPlayerStyle());
+        //System.out.println(playerStats.getPlayerStyle().getMaxHealth());
+
         //custom intro
         if (magicalGirlEnemy.getPlayerStyle() == MagicalGirlFightStyle.gun) {
             System.out.println(ANSI.BLUE + "Your magical girl opponent " + magicalGirlEnemy.getName() + " appears...");
@@ -93,8 +95,7 @@ public abstract class BattleSystem {
             otherPlayer = previousTurnPlayer; // changes magical girl to one whose turn it just was
 
         }
-        sayWinner(playerStats, magicalGirlEnemy); //displays winner
-
+        return sayWinner(playerStats, magicalGirlEnemy); //displays winner
     }
 
     //magical girl player's choices
@@ -321,7 +322,7 @@ public abstract class BattleSystem {
     }
 
     //win or lose display
-    protected void sayWinner(PlayerStats playerStats, PlayerStats magicalGirlEnemy) {
+    protected boolean sayWinner(PlayerStats playerStats, PlayerStats magicalGirlEnemy) {
 //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
         //alive you win or die ya lose
@@ -362,8 +363,9 @@ public abstract class BattleSystem {
             }
             System.out.println("Press [ENTER] to continue.");
             scanner.nextLine();
+            return false; //YOU LOST
         }
-
+            return true; //YOU WIN
     }
 
 

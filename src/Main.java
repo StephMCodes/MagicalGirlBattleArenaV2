@@ -173,16 +173,26 @@ public class Main {
                     //creates battle system
                     BattleSystem battleArena = new RegularBattleSystem();
 
+                    boolean battleWon = false;
                     //battle loop 3 times
-                    for(int i = 1; i<=3; i++){
+                    for(int i = 1; i<=3; i++)
+                    {
 
                         System.out.println("\n~~~~~~~~~~~~~BATTLE " + i + "~~~~~~~~~~~~~");
 
-                        battleArena.startBattle(playerStats); //runs battle with template design pattern
-                        //decorate after resetting your health
-                        battleArena.DecorateCharacter(playerStats); //decorates stats
-                        playerStats.resetStats(); //resets heals and cc's
+                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
 
+                        if (battleWon == true )
+                        {
+                            //decorate after resetting your health
+                            battleArena.DecorateCharacter(playerStats); //decorates stats
+                            playerStats.resetStats(); //resets heals and cc's
+                        }
+                        else {
+                            playerStats.resetStats(); //resets heals and cc's
+                            DisplayMenu();
+                            break;
+                        }
                 }
                     break; //exit the switch loop and the while loop!
                 case 2:
@@ -191,7 +201,37 @@ public class Main {
                     break;
                 case 3:
                     //start game mode 3
+                    //ENDLESS!!!!!!!!!
+                    playerStats = MakeCharacter();
 
+                    //creates battle system
+                    battleArena = new RegularBattleSystem();
+
+                    int battleAmount = 1;
+                    battleWon = true;
+                    //battle loop 3 times
+                    do
+                    {
+
+                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + battleAmount + "~~~~~~~~~~~~~");
+
+                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
+
+                        if (battleWon == true )
+                        {
+                            //you won
+                            battleArena.DecorateCharacter(playerStats); //decorates stats
+                            playerStats.resetStats(); //resets heals and cc's
+                            battleAmount++;
+                        }
+
+                    }while (battleWon==true);
+                    //you lost
+                    playerStats.resetStats(); //resets heals and cc's
+                    System.out.println("Battles fought in ENDLESS MODE: " + battleAmount);
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    DisplayMenu();
                     break;
                 case 4:
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
