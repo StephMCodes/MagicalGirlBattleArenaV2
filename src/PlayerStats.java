@@ -88,10 +88,6 @@ public class PlayerStats {
     public int getHealCharges(){
         return healCharges;
     }
-    //resets for new battle
-    public void resetHeals(){
-        healCharges = 3;
-    }
 
     //gets the health atm
     public int getCurrentHealth(){
@@ -131,7 +127,7 @@ public class PlayerStats {
 
     //bool to check if cc'd then skips turn
     public boolean skipTurn(){
-        if (concussed){
+        if (concussed == true){
             concussed = false;
             return true;
         }

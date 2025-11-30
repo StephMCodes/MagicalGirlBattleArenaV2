@@ -184,8 +184,7 @@ public class Main {
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println( ANSI.BLUE + "[1] Start Base Game");
         System.out.println(ANSI.RED + "[2] Start Endless Mode");
-        System.out.println(ANSI.MAGENTA + "[3] Start Chaos Mode");
-        System.out.println(ANSI.YELLOW + "[4] View Credits");
+        System.out.println(ANSI.YELLOW + "[3] View Credits");
         System.out.println(""+ ANSI.DEFAULT);
 
         //we avoid an exception if user inputs a string and not in
@@ -193,7 +192,7 @@ public class Main {
 
         while (true) {
 
-            System.out.println("Enter [1-4]: ");
+            System.out.println("Enter [1-3]: ");
             String menuSelectString = scanner.nextLine();
 
             while (true) {
@@ -201,7 +200,7 @@ public class Main {
                     menuSelect = Integer.parseInt(menuSelectString);
                     break;
                 } catch (Exception e) {
-                    System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
+                    System.out.println("[INVALID INPUT] Enter a number from 1-3: ");
                     menuSelectString = scanner.nextLine();
 
                 }
@@ -210,105 +209,38 @@ public class Main {
             switch (menuSelect) {
                 case 1:
                     //start game
-                    //make our player
+                    //makes our player and returns the player object with its respective stats
                     PlayerStats playerStats = MakeCharacter();
 
-                    //creates battle system
+                    //creates battle system from template pattern that is used for this game mode
                     BattleSystem battleArena = new RegularBattleSystem();
 
-                    boolean battleWon = false;
+                    //runs the loop for from base battle system
+                    battleArena.gameMode(playerStats);
+                    scanner.nextLine();
+                    DisplayMenu();
+                    break;
 
-                    System.out.println("You enter the arena, ready to face the other combatants for 3 battles!");
 
-                    //battle loop 3 times
-                    for (int i = 1; i <= 3; i++) {
-
-                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + i + "~~~~~~~~~~~~~");
-
-                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
-
-                        if (battleWon == true) {
-                            //decorate after resetting your health
-                            battleArena.DecorateCharacter(playerStats); //decorates stats
-                            playerStats.resetStats(); //resets heals and cc's
-                        } else {
-                            playerStats.resetStats(); //resets heals and cc's
-                            DisplayMenu();
-                            break;
-                        }
-                    }
-                    break; //exit the switch loop and the while loop!
                 case 2:
                     //start game mode 2
                     //ENDLESS!!!!!!!!!
+
+                    //creates character from choice above and saves it as an object
                     playerStats = MakeCharacter();
 
-                    //creates battle system
-                    battleArena = new RegularBattleSystem();
+                    // creates an instance of endless battle system
+                    battleArena = new EndlessBattleSystem();
 
-                    int battleAmount = 1;
-                    battleWon = true;
-                    //battle loop 3 times
-                    System.out.println("The crowd roars as you enter the arena, battling until you drop!");
-
-                    do
-                    {
-
-                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + battleAmount + "~~~~~~~~~~~~~");
-
-                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
-
-                        if (battleWon == true )
-                        {
-                            //you won
-                            battleArena.DecorateCharacter(playerStats); //decorates stats
-                            playerStats.resetStats(); //resets heals and cc's
-                            battleAmount++;
-                        }
-
-                    }while (battleWon==true);
-                    //you lost
-                    playerStats.resetStats(); //resets heals and cc's
-                    System.out.println("Battles fought in ENDLESS MODE: " + battleAmount);
+                    //this runs the loop of endless mode using the player's stats
+                    battleArena.gameMode(playerStats);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
                     DisplayMenu();
                     break;
 
                 case 3:
-                    //creates battle system
-                    battleArena = new RegularBattleSystem();
 
-                    battleAmount = 1;
-                    battleWon = true;
-                    //battle loop 3 times
-                    System.out.println("The arena is covered in hexes that swap you and the other combatant's forms randomly! How long will you last?");
-
-                    do
-                    {
-                        playerStats = MakeRandomCharacter();
-
-                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + battleAmount + "~~~~~~~~~~~~~");
-
-                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
-
-                        if (battleWon == true )
-                        {
-                            //you won
-                            //battleArena.DecorateCharacter(playerStats); //decorates stats
-                            playerStats.resetStats(); //resets heals and cc's
-                            battleAmount++;
-                        }
-
-                    }while (battleWon==true);
-                    //you lost
-                    playerStats.resetStats(); //resets heals and cc's
-                    System.out.println("Battles fought in CHAOS MODE: " + battleAmount);
-                    System.out.println("Press [ENTER] to continue.");
-                    scanner.nextLine();
-                    DisplayMenu();
-                    break;
-                case 4:
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("PROGRAMMERS:");
                     System.out.println(ANSI.MAGENTA + "Bella Perez");
@@ -321,6 +253,8 @@ public class Main {
                     scanner.nextLine();
                     DisplayMenu();
                     break;
+
+
                 default:
                     System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
                     continue;

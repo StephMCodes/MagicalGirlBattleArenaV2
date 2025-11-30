@@ -7,6 +7,9 @@ public abstract class BattleSystem {
     //factory design pattern for enemies
     protected abstract PlayerStats createMagicalGirlEnemy(PlayerStats playerStats);
 
+    //abstraction that's used to implement the game mode in template design pattern
+    public abstract void gameMode(PlayerStats playerStats);
+
     //final to make sure subclasses don't interfere
     public final boolean startBattle(PlayerStats playerStats) {
 
