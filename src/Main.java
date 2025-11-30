@@ -176,9 +176,8 @@ public class Main {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
 
-
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("WELCOME TO MAGICAL GIRL BATTLE ARENA");
+        System.out.println( ANSI.MAGENTA + "WELCOME TO MAGICAL GIRL BATTLE ARENA" + ANSI.DEFAULT);
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Choose one out of four magical girl characters, each with their own name, stats and abilities, to enter into the arena.");
         System.out.println("You then battle the remaining characters to determine who is the champion that will walk away with a magical artefact!");
