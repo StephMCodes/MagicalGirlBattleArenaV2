@@ -15,7 +15,7 @@ public class Main {
         //no choice yet
         MagicalGirlFactory magicalGirlFactory = null;
 
-        int randomCharacter = new Random().nextInt(3);
+        int randomCharacter = new Random().nextInt(4); //FIXED
         switch (randomCharacter)
         {
             case 0:
