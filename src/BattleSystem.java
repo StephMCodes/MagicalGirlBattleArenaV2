@@ -316,9 +316,9 @@ public abstract class BattleSystem {
     //displays health after each turn
     protected void printStatus(PlayerStats playerStats, PlayerStats magicalGirlEnemy) {
         System.out.println("\n~~~~~~~~~~~~~~~~~~~~~~ HEALTH STATUS ~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(ANSI.MAGENTA + "Your HP: " + playerStats.getCurrentHealth());
+        System.out.println("Your HP: " + playerStats.getCurrentHealth());
         System.out.println("Opponent HP: " + magicalGirlEnemy.getCurrentHealth());
-        System.out.println(ANSI.DEFAULT + "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
 
     //win or lose display

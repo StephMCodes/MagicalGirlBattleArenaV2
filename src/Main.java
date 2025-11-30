@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +10,48 @@ public class Main {
 
     }
 
+    static PlayerStats MakeRandomCharacter()
+    {
+        //no choice yet
+        MagicalGirlFactory magicalGirlFactory = null;
+
+        int randomCharacter = new Random().nextInt(3);
+        switch (randomCharacter)
+        {
+            case 0:
+                magicalGirlFactory = new EsmeFactory();
+                GameManager.getInstance().setPlayerName("Esme");
+                PlayerStats.ogStyle = MagicalGirlFightStyle.gun;
+                System.out.println(ANSI.BLUE + "Your random character is... ESME" + ANSI.DEFAULT);
+                return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.gun);
+
+            case 1:
+                magicalGirlFactory = new AstridFactory();
+                GameManager.getInstance().setPlayerName("Astrid");
+                PlayerStats.ogStyle = MagicalGirlFightStyle.jumboHammer;
+                System.out.println(ANSI.RED + "Your random character is... ASTRID!" + ANSI.DEFAULT);
+                return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.jumboHammer);
+
+            case 2:
+                magicalGirlFactory = new IrisFactory();
+                GameManager.getInstance().setPlayerName("Iris");
+                PlayerStats.ogStyle = MagicalGirlFightStyle.darkMagic;
+                System.out.println(ANSI.MAGENTA + "Your random character is... IRIS!" + ANSI.DEFAULT);
+                return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.darkMagic);
+
+            case 3:
+                magicalGirlFactory = new EvangelineFactory();
+                GameManager.getInstance().setPlayerName("Evangeline");
+                PlayerStats.ogStyle = MagicalGirlFightStyle.lightMagic;
+                System.out.println(ANSI.YELLOW + "Your random character is... EVANGELINE!" + ANSI.DEFAULT);
+
+                return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.lightMagic);
+
+        }
+        System.out.println(ANSI.YELLOW + "DEBUG");
+        return magicalGirlFactory.createPlayer(MagicalGirlFightStyle.lightMagic);
+
+    }
     static PlayerStats MakeCharacter() {
         //to take user input we use scanner class
         Scanner scanner = new Scanner(System.in);
@@ -140,8 +183,8 @@ public class Main {
         System.out.println("You then battle the remaining characters to determine who is the champion that will walk away with a magical artefact!");
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         System.out.println( ANSI.BLUE + "[1] Start Base Game");
-        System.out.println(ANSI.RED + "[2] Start Double Game Mode");
-        System.out.println(ANSI.MAGENTA + "[3] Start Endless Game Mode");
+        System.out.println(ANSI.RED + "[2] Start Endless Mode");
+        System.out.println(ANSI.MAGENTA + "[3] Start Chaos Mode");
         System.out.println(ANSI.YELLOW + "[4] View Credits");
         System.out.println(""+ ANSI.DEFAULT);
 
@@ -174,33 +217,29 @@ public class Main {
                     BattleSystem battleArena = new RegularBattleSystem();
 
                     boolean battleWon = false;
+
+                    System.out.println("You enter the arena, ready to face the other combatants for 3 battles!");
+
                     //battle loop 3 times
-                    for(int i = 1; i<=3; i++)
-                    {
+                    for (int i = 1; i <= 3; i++) {
 
                         System.out.println("\n~~~~~~~~~~~~~BATTLE " + i + "~~~~~~~~~~~~~");
 
                         battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
 
-                        if (battleWon == true )
-                        {
+                        if (battleWon == true) {
                             //decorate after resetting your health
                             battleArena.DecorateCharacter(playerStats); //decorates stats
                             playerStats.resetStats(); //resets heals and cc's
-                        }
-                        else {
+                        } else {
                             playerStats.resetStats(); //resets heals and cc's
                             DisplayMenu();
                             break;
                         }
-                }
+                    }
                     break; //exit the switch loop and the while loop!
                 case 2:
                     //start game mode 2
-
-                    break;
-                case 3:
-                    //start game mode 3
                     //ENDLESS!!!!!!!!!
                     playerStats = MakeCharacter();
 
@@ -210,6 +249,8 @@ public class Main {
                     int battleAmount = 1;
                     battleWon = true;
                     //battle loop 3 times
+                    System.out.println("The crowd roars as you enter the arena, battling until you drop!");
+
                     do
                     {
 
@@ -233,6 +274,40 @@ public class Main {
                     scanner.nextLine();
                     DisplayMenu();
                     break;
+
+                case 3:
+                    //creates battle system
+                    battleArena = new RegularBattleSystem();
+
+                    battleAmount = 1;
+                    battleWon = true;
+                    //battle loop 3 times
+                    System.out.println("The arena is covered in hexes that swap you and the other combatant's forms randomly! How long will you last?");
+
+                    do
+                    {
+                        playerStats = MakeRandomCharacter();
+
+                        System.out.println("\n~~~~~~~~~~~~~BATTLE " + battleAmount + "~~~~~~~~~~~~~");
+
+                        battleWon = battleArena.startBattle(playerStats); //runs battle with template design pattern
+
+                        if (battleWon == true )
+                        {
+                            //you won
+                            //battleArena.DecorateCharacter(playerStats); //decorates stats
+                            playerStats.resetStats(); //resets heals and cc's
+                            battleAmount++;
+                        }
+
+                    }while (battleWon==true);
+                    //you lost
+                    playerStats.resetStats(); //resets heals and cc's
+                    System.out.println("Battles fought in CHAOS MODE: " + battleAmount);
+                    System.out.println("Press [ENTER] to continue.");
+                    scanner.nextLine();
+                    DisplayMenu();
+                    break;
                 case 4:
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println("PROGRAMMERS:");
@@ -249,6 +324,7 @@ public class Main {
                 default:
                     System.out.println("[INVALID INPUT] Enter a number from 1-4: ");
                     continue;
+
             }
             break;
         }
