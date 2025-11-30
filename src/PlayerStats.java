@@ -122,6 +122,7 @@ public class PlayerStats {
             magicalGirl.concussed = true;
             //cc'd 1/2 of base attack dmg
             int ccDamage = fightStyle.getStrength() / 2;
+            System.out.println(ANSI.YELLOW + "Concuss attack did " + ccDamage + " damage!" + ANSI.DEFAULT);
             magicalGirl.getHit(ccDamage);
             ccCharges--;
         }

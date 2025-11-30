@@ -272,7 +272,7 @@ public abstract class BattleSystem {
 
         //if cc is 20 or less + have a charge left it attacks
         if (enemyAction <= 20 && magicalGirlEnemy.getCcCharges() > 0) {
-            magicalGirlEnemy.useCC(magicalGirlEnemy);
+            magicalGirlEnemy.useCC(playerStats);
             System.out.println(ANSI.YELLOW + "Your opponent " + magicalGirlEnemy.getName() + " used concuss on you. You skip a turn!" + ANSI.DEFAULT);
             System.out.println("Press [ENTER] to continue.");
             scanner.nextLine();
