@@ -87,7 +87,8 @@ public class Main {
 
         //no choice yet
         MagicalGirlFactory magicalGirlFactory = null;
-//we avoid an exception if user inputs a string and not in
+
+        //we avoid an exception if user inputs a string and not int
         int characterSelect = 0;
         while (true) {
             while (true) {
@@ -208,7 +209,7 @@ public class Main {
 
             switch (menuSelect) {
                 case 1:
-                    //start game
+                    //start BASE game
                     //makes our player and returns the player object with its respective stats
                     PlayerStats playerStats = MakeCharacter();
 
@@ -218,13 +219,13 @@ public class Main {
                     //runs the loop for from base battle system
                     battleArena.gameMode(playerStats);
                     scanner.nextLine();
-                    DisplayMenu();
+                    DisplayMenu(); //when the battle is over we show the menu again
                     break;
 
 
                 case 2:
                     //start game mode 2
-                    //ENDLESS!!!!!!!!!
+                    //ENDLESS MODE
 
                     //creates character from choice above and saves it as an object
                     playerStats = MakeCharacter();
@@ -236,6 +237,7 @@ public class Main {
                     battleArena.gameMode(playerStats);
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
+                    //when the battle is over we show the menu again
                     DisplayMenu();
                     break;
 
@@ -251,7 +253,7 @@ public class Main {
                     System.out.println("Thank you for playing our game.");
                     System.out.println("Press [ENTER] to continue.");
                     scanner.nextLine();
-                    DisplayMenu();
+                    DisplayMenu(); //show the menu again
                     break;
 
 
