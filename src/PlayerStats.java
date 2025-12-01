@@ -13,6 +13,7 @@ public class PlayerStats {
 
     private static Random rnd = new Random();
 
+    //constructor that sets up player stats implementing the interface ICombatStats
     public PlayerStats(ICombatStats fightStyle){
         this.fightStyle = fightStyle;
         this.currentHealth = fightStyle.getMaxHealth();
